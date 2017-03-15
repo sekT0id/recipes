@@ -9,7 +9,7 @@ namespace common\models;
  * @property string $name
  * @property integer $status
  */
-class Ingredients extends BaseModel
+class Ingredients extends \common\baseComponents\BaseModel
 {
     /**
      * @inheritdoc

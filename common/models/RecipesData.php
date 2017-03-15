@@ -8,7 +8,7 @@ namespace common\models;
  * @property integer $id
  * @property string $name
  */
-class RecipesData extends BaseModel
+class RecipesData extends \common\baseComponents\BaseModel
 {
     /**
      * @inheritdoc
