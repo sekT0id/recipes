@@ -4,10 +4,15 @@
 /* @var $content string */
 
 use backend\assets\AppAsset;
+
+use yii\helpers\Url;
 use yii\helpers\Html;
+
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+
 use yii\widgets\Breadcrumbs;
+
 use common\widgets\Alert;
 
 AppAsset::register($this);
@@ -35,7 +40,9 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'Главная',        'url' => ['/']],
+        ['label' => 'Ингредиенты', 'url' => ['/ingredients']],
+        ['label' => 'Рецепты',     'url' => ['/recipes']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
