@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models;
+namespace common\baseComponents;
 
 use yii\helpers\ArrayHelper;
 
@@ -9,17 +9,6 @@ use yii\helpers\ArrayHelper;
  */
 class BaseModel extends \yii\db\ActiveRecord
 {
-    /**
-     * Получить запись по её id
-     *
-     * @var int $scriptId
-     * @return object / boolean
-     */
-    public static function getById($searchedId = null)
-    {
-        return self::find()->where(['id' => $searchedId])->one();
-    }
-
     /**
      * Получить готовый набор данных
      * для отображении в элементе формы dropDownList
