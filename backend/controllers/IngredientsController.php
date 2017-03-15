@@ -3,32 +3,18 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Ingredients;
-use app\models\IngredientsSearch;
-use yii\web\Controller;
+
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+
+use common\models\Ingredients;
+
+use app\models\IngredientsSearch;
 
 /**
  * IngredientsController implements the CRUD actions for Ingredients model.
  */
-class IngredientsController extends Controller
+class IngredientsController extends \common\baseComponents\BaseController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all Ingredients models.
      * @return mixed
