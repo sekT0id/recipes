@@ -19,12 +19,35 @@ class Recipes extends \common\baseComponents\BaseModel
     }
 
     /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id'     => '#',
+            'name'   => 'Наименование',
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['name'], 'string', 'max' => 255],
+            [['name'], 'required'],
+            [['name'], 'unique'],
+        ];
+    }
+
+    /**
      * Relation function
      *
      * @return ActiveRecord object
      */
-    public function get()
+    public function getData()
     {
-        return $this->hasMany(Parts::className(), ['pump_id' => 'id']);
+        return $this->hasMany(RecipesData::className(), ['recipeId' => 'id']);
     }
 }
