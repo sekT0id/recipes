@@ -6,7 +6,9 @@ use Yii;
 
 use yii\web\NotFoundHttpException;
 
+use common\models\Ingredients;
 use common\models\Recipes;
+use common\models\RecipesData;
 
 use app\models\RecipesSearch;
 
@@ -69,12 +71,15 @@ class RecipesController extends \common\baseComponents\BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $modelData = new RecipesData;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'modelData' => $modelData,
+                'ingredients' => Ingredients::getDropDownListItems(),
             ]);
         }
     }

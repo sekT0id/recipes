@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 
+use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $model common\models\Recipes */
 
@@ -17,5 +19,14 @@ $this->params['breadcrumbs'][] = 'Изменить';
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
+
+    <h2>Детали рецепта</h2>
+
+    <?php Pjax::begin();?>
+        <?php echo $this->render('/recipesData/index', [
+            'model' => $model,
+            'modelData' => $modelData,
+        ]) ?>
+    <?php Pjax::end(); ?>
 
 </div>
