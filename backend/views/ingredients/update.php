@@ -8,7 +8,7 @@ use yii\helpers\Html;
 $this->title = 'Изменить ингредиент: ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Ингредиенты', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Обновить';
+$this->params['breadcrumbs'][] = 'Изменить';
 ?>
 <div class="ingredients-update">
 
