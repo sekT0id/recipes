@@ -1,8 +1,5 @@
 <?php
-
 namespace common\models;
-
-use yii\helpers\ArrayHelper;
 
 /**
  * Ingredients model
@@ -44,5 +41,17 @@ class Ingredients extends \common\baseComponents\BaseModel
     public function getData()
     {
         return $this->hasMany(RecipesData::className(), ['ingredientId' => 'id']);
+    }
+
+    /**
+     * Relation function
+     *
+     * @return ActiveRecord object
+     */
+    public function getRecipes()
+    {
+        return $this
+            ->hasMany(Recipes::className(), ['id' => 'recipeId'])
+            ->viaTable(RecipesData::tableName(), ['ingredientId' => 'id']);
     }
 }

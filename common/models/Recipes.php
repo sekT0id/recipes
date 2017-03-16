@@ -1,5 +1,4 @@
 <?php
-
 namespace common\models;
 
 /**
@@ -45,5 +44,17 @@ class Recipes extends \common\baseComponents\BaseModel
     public function getData()
     {
         return $this->hasMany(RecipesData::className(), ['recipeId' => 'id']);
+    }
+
+    /**
+     * Relation function
+     *
+     * @return ActiveRecord object
+     */
+    public function getIngredients()
+    {
+        return $this
+            ->hasMany(Ingredients::className(), ['id' => 'ingredientId'])
+            ->viaTable(RecipesData::tableName(), ['recipeId' => 'id']);
     }
 }
