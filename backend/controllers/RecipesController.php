@@ -8,10 +8,10 @@ use yii\helpers\Url;
 
 use yii\web\NotFoundHttpException;
 
-use app\models\Recipes;
-use app\models\RecipesData;
-use app\models\Ingredients;
-use app\models\RecipesSearch;
+use backend\models\Recipes;
+use backend\models\RecipesData;
+use backend\models\Ingredients;
+use backend\models\RecipesSearch;
 
 /**
  * RecipesController implements the CRUD actions for Recipes model.

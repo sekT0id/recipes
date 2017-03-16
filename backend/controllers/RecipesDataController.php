@@ -6,8 +6,8 @@ use Yii;
 
 use yii\helpers\Url;
 
-use app\models\Ingredients;
-use app\models\RecipesData;
+use backend\models\Ingredients;
+use backend\models\RecipesData;
 
 /**
  * RecipesDataController implements the CRUD actions for RecipesData model.
