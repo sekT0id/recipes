@@ -2,16 +2,24 @@
 namespace frontend\controllers;
 
 use Yii;
+
 use yii\base\InvalidParamException;
+
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
+
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+
 use common\models\LoginForm;
+use common\models\Ingredients;
+
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+
+use frontend\models\RecipesSearch;
 
 /**
  * Site controller
@@ -72,7 +80,16 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $model = new RecipesSearch();
+        $searchModel = $model;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'model' => $model,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'ingredients' => Ingredients::getDropDownListItems(),
+        ]);
     }
 
     /**

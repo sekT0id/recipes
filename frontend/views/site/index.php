@@ -1,22 +1,59 @@
 <?php
 
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';
 ?>
+
 <div class="site-index">
     <div class="body-content">
 
         <div class="row">
             <div class="col-xs-12 col-md-8 col-md-offset-2">
-                <h2>Heading</h2>
+                <h2>Поиск рецептов</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                <p></p>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+                <?php $form = ActiveForm::begin([
+                    'action' => ['index'],
+                    'method' => 'get',
+                ]); ?>
+
+                <?php echo $form
+                    ->field($model, 'ingredientOne')
+                    ->dropDownList($ingredients, ['prompt' => '-- Ингридиент 1 --'])
+                    ->label(false);?>
+
+                <?php echo $form
+                    ->field($model, 'ingredientTwo')
+                    ->dropDownList($ingredients, ['prompt' => '-- Ингридиент 2 --'])
+                    ->label(false);?>
+
+                <?php echo $form
+                    ->field($model, 'ingredientThree')
+                    ->dropDownList($ingredients, ['prompt' => '-- Ингридиент 3 --'])
+                    ->label(false);?>
+
+                <?php echo $form
+                    ->field($model, 'ingredientFour')
+                    ->dropDownList($ingredients, ['prompt' => '-- Ингридиент 4 --'])
+                    ->label(false);?>
+
+                <?php echo $form
+                    ->field($model, 'ingredientFive')
+                    ->dropDownList($ingredients, ['prompt' => '-- Ингридиент 5 --'])
+                    ->label(false);?>
+
+                <div class="form-group">
+                    <?= Html::submitButton('Искать', ['class' => 'btn btn-primary']) ?>
+                    <?= Html::resetButton('Сброс', ['class' => 'btn btn-default']) ?>
+                </div>
+
+                <?php ActiveForm::end(); ?>
+
             </div>
         </div>
 
