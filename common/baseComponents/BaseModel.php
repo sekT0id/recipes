@@ -9,8 +9,6 @@ use yii\helpers\ArrayHelper;
  */
 class BaseModel extends \yii\db\ActiveRecord
 {
-    const STATUS_ACTIVE = 1;
-
     /**
      * Получить готовый набор данных
      * для отображении в элементе формы dropDownList

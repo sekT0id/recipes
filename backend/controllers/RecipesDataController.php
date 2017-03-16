@@ -24,13 +24,11 @@ class RecipesDataController extends \common\baseComponents\BaseController
         $model = new RecipesData();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect([Url::previous()]);
+            Yii::$app->session->setFlash('success', 'Ингредиент успешно добавлен в рецепт');
         } else {
-            Yii::$app->session->setFlash(
-                'error',
-                'Что то пошло не так ('
-            );
+            Yii::$app->session->setFlash('error', 'Что то пошло не так (');
         }
+        return $this->redirect([Url::previous()]);
     }
 
     /**

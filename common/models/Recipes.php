@@ -10,6 +10,8 @@ namespace common\models;
  */
 class Recipes extends \common\baseComponents\BaseModel
 {
+    const STATUS_ACTIVE = 1;
+
     /**
      * @inheritdoc
      */
@@ -39,6 +41,9 @@ class Recipes extends \common\baseComponents\BaseModel
             [['name'], 'string', 'max' => 255],
             [['name'], 'required'],
             [['name'], 'unique'],
+
+            [['status'], 'required'],
+            [['status'], 'integer'],
         ];
     }
 
