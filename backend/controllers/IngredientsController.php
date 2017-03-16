@@ -4,6 +4,8 @@ namespace backend\controllers;
 
 use Yii;
 
+use yii\helpers\Url;
+
 use yii\web\NotFoundHttpException;
 
 use common\models\Ingredients;
@@ -21,6 +23,8 @@ class IngredientsController extends \common\baseComponents\BaseController
      */
     public function actionIndex()
     {
+        Url::remember();
+
         $searchModel = new IngredientsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -28,6 +32,42 @@ class IngredientsController extends \common\baseComponents\BaseController
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    /**
+     * Установить статус активности для ингредиента.
+     * Также увеличивает счетчик активности рецепта.
+     */
+    public function actionSetActiveStatus($id)
+    {
+        $model = $this->findModel($id);
+        $model->scenario = $model::SCENARIO_SET_STATUS;
+
+        if ($model->setActiveStatus() && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Ингредиент ' . $model->name . ' снова виден!');
+        } else {
+            Yii::$app->session->setFlash('error', 'Что то пошло не так (');
+        }
+
+        return $this->redirect([Url::previous()]);
+    }
+
+    /**
+     * Установить статус скрытности для ингредиента.
+     * Также уменьшает счетчик активности рецепта.
+     */
+    public function actionSetHiddenStatus($id)
+    {
+        $model = $this->findModel($id);
+        $model->scenario = $model::SCENARIO_SET_STATUS;
+
+        if ($model->setHiddenStatus() && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Ингредиент ' . $model->name . ' успешно скрыт.');
+        } else {
+            Yii::$app->session->setFlash('error', 'Что то пошло не так (');
+        }
+
+        return $this->redirect([Url::previous()]);
     }
 
     /**

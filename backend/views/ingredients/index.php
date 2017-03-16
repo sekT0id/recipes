@@ -27,7 +27,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 'id',
                 'name:ntext',
-                'status',
+                [
+                    'attribute' => 'status',
+                    'label' => 'Статус',
+                    'format' => 'text',
+                    'content' => function ($model) {
+                        $status = '';
+                        $title = '';
+                        if ($model->status == $model::STATUS_ACTIVE) {
+                            $title = 'Скрыть';
+                            $status = 'hidden';
+                        } else {
+                            $title = 'Показать';
+                            $status = 'active';
+                        }
+                        return Html::a($title, ['set-' . $status . '-status', 'id' => $model->id]);
+                    },
+                    'contentOptions' => [
+                        'class' => 'text-center',
+                    ],
+                ],
 
                 ['class' => 'yii\grid\ActionColumn'],
             ],
