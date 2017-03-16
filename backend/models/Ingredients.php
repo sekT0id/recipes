@@ -1,6 +1,7 @@
 <?php
-
 namespace backend\models;
+
+use yii\helpers\ArrayHelper;
 
 use common\models\Ingredients as CommonIngredients;
 
@@ -63,7 +64,7 @@ class Ingredients extends CommonIngredients
      *
      * @return array of id's
      */
-    public function getRecipes()
+    public function getRecipesIds()
     {
         return ArrayHelper::getColumn($this->data, 'recipeId');
     }

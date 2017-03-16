@@ -45,7 +45,7 @@ class IngredientsController extends \common\baseComponents\BaseController
 
         if ($model->setActiveStatus() && $model->save()) {
             // Увеличиваем статус рецепта
-            Recipes::increaseStatus($model->recipes);
+            Recipes::increaseStatus($model->recipesIds);
 
             Yii::$app->session->setFlash('success', 'Ингредиент ' . $model->name . ' снова виден!');
         } else {
@@ -66,7 +66,7 @@ class IngredientsController extends \common\baseComponents\BaseController
 
         if ($model->setHiddenStatus() && $model->save()) {
             // Уменьшаем статус рецепта
-            Recipes::reduceStatus($model->recipes);
+            Recipes::reduceStatus($model->recipesIds);
 
             Yii::$app->session->setFlash('success', 'Ингредиент ' . $model->name . ' успешно скрыт.');
         } else {
@@ -137,7 +137,7 @@ class IngredientsController extends \common\baseComponents\BaseController
 
         if ($model->status == $model::STATUS_HIDDEN) {
             // Увеличиваем статус рецептов
-            Recipes::increaseStatus($model->recipes);
+            Recipes::increaseStatus($model->recipesIds);
         }
         // Очищаем все упоминания ингридиента.
         // Удалять рецепты с данным ингридиентом не буду.

@@ -1,5 +1,4 @@
 <?php
-
 namespace backend\models;
 
 use common\models\Recipes as CommonRecipes;
