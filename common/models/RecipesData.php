@@ -50,4 +50,14 @@ class RecipesData extends \common\baseComponents\BaseModel
     {
         return $this->hasOne(Ingredients::className(), ['id' => 'ingredientId']);
     }
+
+    /**
+     * Relation function
+     *
+     * @return ActiveRecord object
+     */
+    public function getRecipe()
+    {
+        return $this->hasOne(Recipes::className(), ['id' => 'recipeId']);
+    }
 }

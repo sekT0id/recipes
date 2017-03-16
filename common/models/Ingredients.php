@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use yii\helpers\ArrayHelper;
+
 /**
  * Ingredients model
  *
@@ -51,6 +53,11 @@ class Ingredients extends \common\baseComponents\BaseModel
         ];
     }
 
+    /**
+     * Установить статус активности для записи
+     *
+     * @return boolean
+     */
     public function setActiveStatus()
     {
         if ($this->status == self::STATUS_HIDDEN) {
@@ -60,6 +67,11 @@ class Ingredients extends \common\baseComponents\BaseModel
         return false;
     }
 
+    /**
+     * Установить скрытый статус для записи
+     *
+     * @return boolean
+     */
     public function setHiddenStatus()
     {
         if ($this->status == self::STATUS_ACTIVE) {
@@ -67,5 +79,25 @@ class Ingredients extends \common\baseComponents\BaseModel
             return true;
         }
         return false;
+    }
+
+    /**
+     * Получить id рецептов с данным ингридиентом
+     *
+     * @return array of id's
+     */
+    public function getRecipes()
+    {
+        return ArrayHelper::getColumn($this->data, 'recipeId');
+    }
+
+    /**
+     * Relation function
+     *
+     * @return ActiveRecord object
+     */
+    public function getData()
+    {
+        return $this->hasMany(RecipesData::className(), ['ingredientId' => 'id']);
     }
 }

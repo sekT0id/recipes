@@ -9,6 +9,7 @@ use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 
 use common\models\Ingredients;
+use common\models\Recipes;
 
 use app\models\IngredientsSearch;
 
@@ -44,6 +45,9 @@ class IngredientsController extends \common\baseComponents\BaseController
         $model->scenario = $model::SCENARIO_SET_STATUS;
 
         if ($model->setActiveStatus() && $model->save()) {
+            // Увеличиваем статус рецепта
+            Recipes::increaseStatus($model->recipes);
+
             Yii::$app->session->setFlash('success', 'Ингредиент ' . $model->name . ' снова виден!');
         } else {
             Yii::$app->session->setFlash('error', 'Что то пошло не так (');
@@ -62,6 +66,9 @@ class IngredientsController extends \common\baseComponents\BaseController
         $model->scenario = $model::SCENARIO_SET_STATUS;
 
         if ($model->setHiddenStatus() && $model->save()) {
+            // Уменьшаем статус рецепта
+            Recipes::reduceStatus($model->recipes);
+
             Yii::$app->session->setFlash('success', 'Ингредиент ' . $model->name . ' успешно скрыт.');
         } else {
             Yii::$app->session->setFlash('error', 'Что то пошло не так (');
