@@ -26,6 +26,7 @@ class Recipes extends \common\baseComponents\BaseModel
         return [
             'id'     => '#',
             'name'   => 'Наименование',
+            'status' => 'Видимость',
         ];
     }
 
