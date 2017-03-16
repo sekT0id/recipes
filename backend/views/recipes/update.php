@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = 'Изменить';
         'model' => $model,
     ]);?>
 
-    <?php echo $this->render('/recipesData/index', [
+    <?php echo $this->render('/recipes-data/index', [
         'model'       => $model,
         'modelData'   => $modelData,
         'ingredients' => $ingredients,

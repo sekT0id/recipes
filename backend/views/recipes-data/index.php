@@ -61,6 +61,12 @@ use backend\widgets\ExModal;
                         <td><?php echo $item->ingredient->name;?></td>
                         <td>
                             <?php echo Html::a(
+                                'Изменить',
+                                ['recipes-data/update', 'id' => $item->id]
+                            );?>
+                        </td>
+                        <td>
+                            <?php echo Html::a(
                                 'Удалить',
                                 ['recipes-data/delete', 'id' => $item->id],
                                 [

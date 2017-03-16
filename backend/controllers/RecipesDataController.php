@@ -7,6 +7,7 @@ use Yii;
 use yii\helpers\Url;
 
 use common\models\RecipesData;
+use common\models\Ingredients;
 
 /**
  * RecipesDataController implements the CRUD actions for RecipesData model.
@@ -43,10 +44,11 @@ class RecipesDataController extends \common\baseComponents\BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect([Url::previous()]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'ingredients' => Ingredients::getDropDownListItems(),
             ]);
         }
     }

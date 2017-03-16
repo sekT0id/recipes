@@ -10,13 +10,10 @@ use yii\widgets\ActiveForm;
 
 <div class="recipes-data-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin();?>
 
-    <?= $form->field($model, 'id')->textInput() ?>
-
-    <?= $form->field($model, 'recipeId')->textInput() ?>
-
-    <?= $form->field($model, 'ingredientId')->textInput() ?>
+    <?php echo $form->field($model, 'recipeId')->hiddenInput()->label(false);?>
+    <?php echo $form->field($model, 'ingredientId')->dropDownList($ingredients);?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
