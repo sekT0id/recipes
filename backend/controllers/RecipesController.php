@@ -95,7 +95,12 @@ class RecipesController extends \common\baseComponents\BaseController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+
+        // Очищаем все упоминания рецепта
+        RecipesData::deleteRecipe($model->id);
+        // Удаляем сам рецепт
+        $model->delete();
 
         return $this->redirect(['index']);
     }

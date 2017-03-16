@@ -133,7 +133,18 @@ class IngredientsController extends \common\baseComponents\BaseController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+
+        if ($model->status == $model::STATUS_HIDDEN) {
+            // Увеличиваем статус рецептов
+            Recipes::increaseStatus($model->recipes);
+        }
+        // Очищаем все упоминания ингридиента.
+        // Удалять рецепты с данным ингридиентом не буду.
+        // т.к. в них можно добавить другой ингридиент.
+        RecipesData::deleteIngredient($model->id);
+        // Удаляем сам ингридиент
+        $model->delete();
 
         return $this->redirect(['index']);
     }

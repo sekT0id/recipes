@@ -19,4 +19,20 @@ class RecipesData extends CommonRecipesData
             [['recipeId', 'ingredientId'], 'integer'],
         ];
     }
+
+    /**
+     * Удалить всю информацию о рецепте.
+     */
+    public static function deleteRecipe($id)
+    {
+        self::deleteAll(['recipeId' => $id]);
+    }
+
+    /**
+     * Удалить всю информацию об ингридиенте.
+     */
+    public static function deleteIngredient($id)
+    {
+        self::deleteAll(['ingredientId' => $id]);
+    }
 }
