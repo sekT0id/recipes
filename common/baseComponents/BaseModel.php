@@ -17,9 +17,6 @@ class BaseModel extends \yii\db\ActiveRecord
      */
     public static function getDropDownListItems()
     {
-        if (self::hasAttribute('id') && self::hasAttribute('name')) {
-            return ArrayHelper::map(self::find()->all(), 'id', 'name');
-        }
-        return null;
+        return ArrayHelper::map(self::find()->all(), 'id', 'name');
     }
 }

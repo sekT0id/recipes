@@ -4,6 +4,8 @@ namespace backend\controllers;
 
 use Yii;
 
+use yii\helpers\Url;
+
 use yii\web\NotFoundHttpException;
 
 use common\models\Ingredients;
@@ -70,6 +72,8 @@ class RecipesController extends \common\baseComponents\BaseController
      */
     public function actionUpdate($id)
     {
+        Url::remember();
+
         $model = $this->findModel($id);
         $modelData = new RecipesData;
 

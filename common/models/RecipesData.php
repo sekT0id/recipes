@@ -17,4 +17,37 @@ class RecipesData extends \common\baseComponents\BaseModel
     {
         return '{{%recipes_data}}';
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id'           => '#',
+            'recipeId'     => 'Рецепт',
+            'ingredientId' => 'Ингредиент',
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['recipeId', 'ingredientId'], 'required'],
+            [['recipeId', 'ingredientId'], 'integer'],
+        ];
+    }
+
+    /**
+     * Relation function
+     *
+     * @return ActiveRecord object
+     */
+    public function getIngredient()
+    {
+        return $this->hasOne(Ingredients::className(), ['id' => 'ingredientId']);
+    }
 }

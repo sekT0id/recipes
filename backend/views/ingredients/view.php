@@ -19,19 +19,19 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы точно хотите удалить элемент?',
                 'method' => 'post',
             ],
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'name:ntext',
-            'status',
-        ],
-    ]) ?>
-
 </div>
+
+<?php echo DetailView::widget([
+    'model' => $model,
+    'attributes' => [
+        'id',
+        'name:ntext',
+        'status',
+    ],
+]);?>
