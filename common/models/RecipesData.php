@@ -31,17 +31,6 @@ class RecipesData extends \common\baseComponents\BaseModel
     }
 
     /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['recipeId', 'ingredientId'], 'required'],
-            [['recipeId', 'ingredientId'], 'integer'],
-        ];
-    }
-
-    /**
      * Relation function
      *
      * @return ActiveRecord object

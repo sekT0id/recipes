@@ -8,9 +8,8 @@ use yii\helpers\Url;
 
 use yii\web\NotFoundHttpException;
 
-use common\models\Ingredients;
-use common\models\Recipes;
-
+use app\models\Recipes;
+use app\models\Ingredients;
 use app\models\IngredientsSearch;
 
 /**
