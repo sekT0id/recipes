@@ -34,10 +34,7 @@ use backend\widgets\ExModal;
             ],
         ]);?>
 
-            <?php echo $form
-                ->field($modelData, 'ingredientId')
-                ->dropDownList($ingredients);?>
-
+            <?php echo $form->field($modelData, 'ingredientId')->dropDownList($ingredients);?>
             <?php echo $form
                 ->field($modelData, 'recipeId')
                 ->hiddenInput(['value' => $model->id])
