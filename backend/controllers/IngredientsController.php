@@ -9,6 +9,7 @@ use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 
 use backend\models\Recipes;
+use backend\models\RecipesData;
 use backend\models\Ingredients;
 use backend\models\IngredientsSearch;
 
