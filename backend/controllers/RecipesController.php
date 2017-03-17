@@ -24,6 +24,7 @@ class RecipesController extends \common\baseComponents\BaseController
      */
     public function actionIndex()
     {
+        Url::remember();
         $searchModel = new RecipesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -55,7 +56,8 @@ class RecipesController extends \common\baseComponents\BaseController
         $model = new Recipes();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->session->setFlash('success', 'Рецепт "' . $model->name . '", был добавлен.');
+            return $this->redirect([Url::previous()]);
         } else {
             return $this->render('create', [
                 'model' => $model,

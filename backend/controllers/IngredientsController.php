@@ -72,7 +72,6 @@ class IngredientsController extends \common\baseComponents\BaseController
         } else {
             Yii::$app->session->setFlash('error', 'Что то пошло не так (');
         }
-
         return $this->redirect([Url::previous()]);
     }
 
@@ -98,7 +97,8 @@ class IngredientsController extends \common\baseComponents\BaseController
         $model = new Ingredients();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->session->setFlash('success', 'Ингредиент "' . $model->name . '", был добавлен.');
+            return $this->redirect([Url::previous()]);
         } else {
             return $this->render('create', [
                 'model' => $model,
