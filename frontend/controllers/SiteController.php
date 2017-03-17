@@ -20,6 +20,7 @@ use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 
 use frontend\models\RecipesSearch;
+use frontend\models\RecipesDataSearch;
 
 /**
  * Site controller
@@ -80,14 +81,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $model = new RecipesSearch();
-        $searchModel = $model;
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = new RecipesDataSearch();
+        $searchModel = $model->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'model' => $model,
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
             'ingredients' => Ingredients::getDropDownListItems(),
         ]);
     }
