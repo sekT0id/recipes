@@ -40,11 +40,6 @@ class RecipesDataSearch extends \common\models\RecipesData
     public $minEntranceCount = 2;
 
     /**
-     * Количество заполненных полей формы.
-     */
-    public $filledFieldsCount = null;
-
-    /**
      * Сюда будут складываться id искомых ингридиентов
      */
     public $searchedIngredientsId = [];
@@ -66,7 +61,7 @@ class RecipesDataSearch extends \common\models\RecipesData
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Ищем рецепты по заданным ингредиентам ($params)
      *
      * @param array $params
      *
@@ -78,9 +73,9 @@ class RecipesDataSearch extends \common\models\RecipesData
 
         if ($this->validate()) {
 
-            $this->setFilledFieldsInfo($params);
+            $this->setSearchedIngredientsId($params);
 
-            $query = self::find()->joinWith('recipe')
+            return self::find()->joinWith('recipe')
                 ->select(['recipeId', 'entranceCount' => 'COUNT(*)'])
                 ->where([self::tableName() . '.ingredientId' => $this->searchedIngredientsId])
                 ->andWhere(['>=', Recipes::tableName() . '.status', Recipes::STATUS_ACTIVE])
@@ -88,18 +83,18 @@ class RecipesDataSearch extends \common\models\RecipesData
                 ->having(['>=', 'entranceCount', $this->minEntranceCount])
                 ->orderBy(['entranceCount' => SORT_DESC])
                 ->all();
-
-            return $query;
         }
         return null;
     }
 
-    private function setFilledFieldsInfo($fields = null)
+    /**
+     * Заполняем $this->searchedIngredientsId id искомых ингредиентов.
+     */
+    private function setSearchedIngredientsId($fields = null)
     {
         if ($fields !== null) {
             foreach ($fields[$this->formName()] as $field => $value) {
                 if ($value != null) {
-                    $this->filledFieldsCount++;
                     array_push($this->searchedIngredientsId, $value);
                 }
             }

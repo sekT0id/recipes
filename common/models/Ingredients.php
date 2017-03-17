@@ -10,6 +10,10 @@ namespace common\models;
  */
 class Ingredients extends \common\baseComponents\BaseModel
 {
+    /**
+     * Показатель активности записи.
+     * Соответственно активный и скрытый
+     */
     const STATUS_ACTIVE = 1;
     const STATUS_HIDDEN = 0;
 
