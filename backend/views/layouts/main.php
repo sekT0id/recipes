@@ -40,7 +40,7 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Главная',        'url' => ['/']],
+        ['label' => 'Главная',     'url' => ['/']],
         ['label' => 'Ингредиенты', 'url' => ['/ingredients']],
         ['label' => 'Рецепты',     'url' => ['/recipes']],
     ];
