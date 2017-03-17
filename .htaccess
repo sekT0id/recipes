@@ -1,0 +1,33 @@
+#php_value error_reporting -1
+#php_flag display_errors on
+#php_flag display_startup_errors on
+#php_flag ignore_repeated_source off
+#php_flag ignore_repeated_errors off
+#php_flag track_errors on
+#php_flag log_errors on
+#php_flag mysql.trace_mode on
+
+Options +FollowSymLinks
+IndexIgnore */*
+RewriteEngine on
+ 
+# Если запрос начинается с /admin, то заменяем на /backend/web/
+RewriteCond %{HTTP_HOST} ^admin\.recipes\.p96220j8\.bget\.ru$ [NC]
+RewriteCond %{REQUEST_URI} !/backend/web/
+RewriteRule ^(.*)$ /backend/web/$1 [L,QSA]
+ 
+# Добавляем другой запрос /frontend/web/$1
+RewriteCond %{REQUEST_URI} !^/(frontend/web|backend/web)
+RewriteRule (.*) /frontend/web/$1
+ 
+# Если frontend запрос
+RewriteCond %{REQUEST_URI} ^/frontend/web
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /frontend/web/index.php
+ 
+# Если backend запрос
+RewriteCond %{REQUEST_URI} ^/backend/web
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /backend/web/index.php
