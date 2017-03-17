@@ -55,7 +55,7 @@ class RecipesDataSearch extends \common\models\RecipesData
                 AtLeastValidator::className(),
                 'in' => ['ingredientOne', 'ingredientTwo', 'ingredientThree', 'ingredientFour', 'ingredientFive'],
                 'min' => self::AT_LEAST,
-                'message' => 'Для поиска необходимо выбрать как минимум два ингридиента',
+                'message' => 'Выберите больше ингредиентов',
             ],
         ];
     }
