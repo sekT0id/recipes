@@ -1,12 +1,15 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';
+
+$fullEntrance = null;
 ?>
 
 <div class="site-index">
@@ -62,9 +65,21 @@ $this->title = 'My Yii Application';
 
                 <?php if ($searchModel) :?>
 
-                    <?php foreach ($searchModel as $item) :?>
+                    <p>Результаты поиска:</p>
 
-                        <p>Результаты поиска:</p>
+                    <?php foreach ($searchModel as $item) :?>
+                        <?php
+                            $difference = array_diff(
+                                $model->searchedIngredientsId,
+                                ArrayHelper::getColumn($item->recipe->ingredients, 'id')
+                            );
+
+                            // Если найдено полное вхождение поиска в результат.
+                            if (count($difference) == 0 and $fullEntrance === null) $fullEntrance = true;
+                            // Как только пошли не полные вхождения, обрываем цикл.
+                            if (count($difference) > 0 and $fullEntrance !== null) break;
+                        ?>
+
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <strong>
@@ -76,7 +91,7 @@ $this->title = 'My Yii Application';
 
                                     <?php if (in_array($ingredient->id, $model->searchedIngredientsId)) :?>
                                         <p><strong><?php echo $ingredient->name;?></strong></p>
-                                    <?php else:?>
+                                    <?php else :?>
                                         <p><?php echo $ingredient->name;?></p>
                                     <?php endif;?>
 
