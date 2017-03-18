@@ -57,7 +57,7 @@ class RecipesController extends \common\baseComponents\BaseController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', 'Рецепт "' . $model->name . '", был добавлен.');
-            return $this->redirect([Url::previous()]);
+            return $this->redirect(Url::toRoute(['/recipes/update', 'id' => $model->id]));
         } else {
             return $this->render('create', [
                 'model' => $model,
